@@ -69,5 +69,17 @@ http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC340
 ###Get PO Items(Loads all data to Item order)
 http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC34052/Items
 
-###GET main entity and associated entity together(Header and PO items together)
+###GET main entity and associated entity together(Header and PO items together, this is for mixin concept)
 http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC34052?$expand=Items
+
+###Boosting a order
+POST http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC34052')/CatalogService.boost
+Content-Type: application/json
+
+{}
+
+###Boosting a order(get largest order)
+GET http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC34052')/CatalogService.largestOrder()
+
+###Get Address set
+GET http://localhost:4004/odata/v4/CatalogService/AddressSet
