@@ -1,0 +1,73 @@
+##### Creating Odata
+###Gat the service document
+http://localhost:4004/odata/v4/CatalogService
+
+### Get service metadata document
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Get all employee data from db
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+
+### Gat selected properties - Select c1, c2, c3 From table
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=ID,nameFirst,sex,salaryAmount
+
+###Get Top 2 employees
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$top=2&$skip=2
+
+###Filtering
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=bankName eq 'My Bank of San Francisco'
+
+###Filtering by pattern search
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=contains(nameFirst,'ann')
+
+###Counting the no of employess
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+###POST Call - Create new employee
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+      "ID": "02BD2137-0890-1EEA-A6C2-BB55C198E8DB",
+      "nameFirst": "Ananya",
+      "nameMiddle": null,
+      "nameLast": "Biswas",
+      "nameInitials": null,
+      "sex": "F",
+      "language": "E",
+      "phoneNumber": null,
+      "email": "ananya.biswas@ey.com",
+      "loginName": "BISWASAN",
+      "Currency_code": "USD",
+      "salaryAmount": 95000,
+      "accountNumber": "9988776655",
+      "bankId": "12100035",
+      "bankName": "My Bank of San Francisco"
+}
+
+###Get the employee which was created
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C198E8DB
+
+###Update employee Salary
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C198E8DB
+Content-Type: application/json
+
+{
+    "salaryAmount": 1200002,
+    "Currency_code": "EUR"
+}
+
+### Delete an user
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/02BD2137-0890-1EEA-A6C2-BB55C198E8DB
+
+###Display All purchase orders
+http://localhost:4004/odata/v4/CatalogService/POs
+
+###Get single PO
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC34052
+
+###Get PO Items(Loads all data to Item order)
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC34052/Items
+
+###GET main entity and associated entity together(Header and PO items together)
+http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC34052?$expand=Items
