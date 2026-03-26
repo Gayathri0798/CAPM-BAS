@@ -6,7 +6,7 @@ http://localhost:4004/odata/v4/CatalogService
 http://localhost:4004/odata/v4/CatalogService/$metadata
 
 ###Get all employee data from db
-http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+http://localhost:4004/odata/v2/CatalogService/EmployeeSet
 
 ### Gat selected properties - Select c1, c2, c3 From table
 http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$select=ID,nameFirst,sex,salaryAmount
@@ -73,7 +73,7 @@ http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC340
 http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC34052?$expand=Items
 
 ###Boosting a order
-POST http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC34052')/CatalogService.boost
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC34052/boost
 Content-Type: application/json
 
 {}

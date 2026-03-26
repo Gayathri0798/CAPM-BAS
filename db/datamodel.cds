@@ -6,15 +6,15 @@ using { anubhav.common } from './commons';
 context master {
     
     entity businesspartner {
-        key NODE_KEY: common.Guid;
+        key NODE_KEY: common.Guid @title : '{i18n>BP_KEY}';
         BP_ROLE: String(2);
         EMAIL_ADDRESS: String(105);
         PHONE_NUMBER: String(32);
         FAX_NUMBER: String(32);
         WEB_ADDRESS: String(44);
         ADDRESS_GUID: Association to address;
-        BP_ID: String(32);
-        COMPANY_NAME: String(250);
+        BP_ID: String(32) @title : '{i18n>COMPANY_NAME}';
+        COMPANY_NAME: String(250) @title : '{i18n>BP_ID}';
     }
 
     entity address {
@@ -23,7 +23,7 @@ context master {
         POSTAL_CODE: String(8);
         STREET: String(44);
         BUILDING: String(128);
-        COUNTRY: String(44);
+        COUNTRY: String(44) @title : '{i18n>COUNTRY}';
         ADDRESS_TYPE: String(44);
         VAL_START_DATE: Date;
         VAL_END_DATE: Date;
@@ -34,7 +34,7 @@ context master {
     }
 
     entity product{
-        key NODE_KEY: common.Guid;
+        key NODE_KEY: common.Guid @title : '{i18n>PRODUCT_KEY}';
         PRODUCT_ID: String(28);
         TYPE_CODE: String(2);
         CATEGORY: String(32);
@@ -72,19 +72,19 @@ context master {
 
 context transaction {
     entity purchaseorder: common.Amount{
-        key NODE_KEY: common.Guid;
-        PO_ID: String(40);
+        key NODE_KEY: common.Guid @title : '{i18n>PO_KEY}';
+        PO_ID: String(40) @title : '{i18n>PO_NO}';
         PARTNER_GUID: Association to master.businesspartner;
-        LIFECYCLE_STATUS: String(1);
-        OVERALL_STATUS: String(1);
-        Items: Association to many poitems on Items.PARENT_KEY = $self;
+        LIFECYCLE_STATUS: String(1) @title : '{i18n>STATUS}';
+        OVERALL_STATUS: String(1) @title : '{i18n>STATUS}';
+        Items: Composition of many poitems on Items.PARENT_KEY = $self;
     }
 
     entity poitems: common.Amount{
-        key NODE_KEY: common.Guid;
-        PARENT_KEY: Association to purchaseorder;
-        PO_ITEM_POS: Integer;
-        PRODUCT_GUID: Association to master.product;
+        key NODE_KEY: common.Guid @title : '{i18n>PO_ITEM_KEY}';
+        PARENT_KEY: Association to purchaseorder @title : '{i18n>PO_KEY';
+        PO_ITEM_POS: Integer @title : '{i18n>ITEM_POS}';
+        PRODUCT_GUID: Association to master.product @title : '{i18n>PRODUCT_KEY}';
     }
 }
 

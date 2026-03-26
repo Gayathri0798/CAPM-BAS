@@ -14,12 +14,13 @@ module.exports = cds.service.impl( async function(){
     this.on('boost', async (req,res) => {
         try {
             const ID = req.params[0];
-            console.log("Hey Amigo, Your purchase order with id " + req.params[0] + " will be boosted");
+            console.log("Hey Amigo, Your purchase order with id " + JSON.stringify(ID));
             const tx = cds.tx(req); //tx is provided by sap
             await tx.update(POs).with({
                 GROSS_AMOUNT: { '+=' : 20000 },
                 NOTE: 'Boosted!!'
             }).where(ID);
+            return await tx.read(POs).where(ID);
         } catch (error) {
             return "Error " + error.toString();
         }
@@ -33,13 +34,13 @@ module.exports = cds.service.impl( async function(){
     //     }
     // });
 
-    this.on('largestOrder', async (req,res) => {
+    this.on('largestOrder','POs', async (req,res) => {
         try {
             const ID = req.params[0];
             const tx = cds.tx(req);
             
             //SELECT * UPTO 1 ROW FROM dbtab ORDER BY GROSS_AMOUNT desc
-            const reply = await tx.read(POs).orderBy({
+            const reply = await tx.read(this.entities.POs).orderBy({
                 GROSS_AMOUNT: 'desc'
             }).limit(1);
 
