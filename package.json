@@ -20,6 +20,8 @@
     "app/*"
   ],
   "sapux": [
+    "app/managepo",
+    "app/managepo",
     "app/managepo"
   ]
 }

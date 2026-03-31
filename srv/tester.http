@@ -5,6 +5,9 @@ http://localhost:4004/odata/v4/CatalogService
 ### Get service metadata document
 http://localhost:4004/odata/v4/CatalogService/$metadata
 
+###Get service expand items
+http://localhost:4004/odata/v4/CatalogService/POs?$expand=Items
+
 ###Get all employee data from db
 http://localhost:4004/odata/v2/CatalogService/EmployeeSet
 

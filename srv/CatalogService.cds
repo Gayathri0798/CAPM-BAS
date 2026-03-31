@@ -10,19 +10,19 @@
 //     entity BusinessPartnerSet as projection on db.master.businesspartner;
 //     entity ProductSet as projection on db.master.product;
 // }
-using { anubhav.db } from '../db/datamodel';
+using { anubhav.db.master, anubhav.db.transaction } from '../db/datamodel';
 using { cappo.cds } from '../db/CDSViews';
 
 
 service CatalogService @(path:'CatalogService') {
 
     @Capabilities : { Insertable, Deletable: false }
-    entity BusinessPartnerSet as projection on db.master.businesspartner;
-    entity AddressSet as projection on db.master.address;
+    entity BusinessPartnerSet as projection on master.businesspartner;
+    entity AddressSet as projection on master.address;
     // @readonly
-    entity EmployeeSet as projection on db.master.employees;
+    entity EmployeeSet as projection on master.employees;
     // entity PurchaseOrderItems as projection on db.transaction.poitems;
-    entity POs as projection on db.transaction.purchaseorder{
+    entity POs @(odata.draft.enabled: true) as projection on transaction.purchaseorder{
         *,
         case OVERALL_STATUS
             when 'N' then 'New'
@@ -31,7 +31,7 @@ service CatalogService @(path:'CatalogService') {
             when 'D' then 'Delivered'
             when 'A' then 'Approved' 
             when 'X' then 'Rejected' 
-            end as OveralStatus: String(20),
+            end as OverallStatus: String(20),
             case OVERALL_STATUS
             when 'N' then 2
             when 'P' then 2
@@ -45,8 +45,8 @@ service CatalogService @(path:'CatalogService') {
         action boost() returns POs;
         function largestOrder() returns array of POs;
     };
-        entity POItems as projection on db.transaction.poitems;
-    entity ProductSet as projection on db.master.product;
+        entity POItems as projection on transaction.poitems;
+    entity ProductSet as projection on master.product;
     // entity CProductValuesView as projection on cds.CDSViews.CProductValuesView;
 
 }

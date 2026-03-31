@@ -1,7 +1,7 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Wed Mar 25 2026 12:40:46 GMT+0000 (Coordinated Universal Time)|
+|**Generation Date and Time**<br>Thu Mar 26 2026 06:31:46 GMT+0000 (Coordinated Universal Time)|
 |**App Generator**<br>SAP Fiori Application Generator|
 |**App Generator Version**<br>1.21.0|
 |**Generation Platform**<br>SAP Business Application Studio|
@@ -26,7 +26,7 @@ An SAP Fiori application.
 
 -   This app has been generated using the SAP Fiori tools - App Generator, as part of the SAP Fiori tools suite.  To launch the generated app, start your CAP project:  and navigate to the following location in your browser:
 
-http://localhost:4004/managepo/webapp/index.html
+http://localhost:4004/anubhav.po.managepo/index.html
 
 #### Pre-requisites:
 

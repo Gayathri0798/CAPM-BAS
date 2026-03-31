@@ -3,24 +3,35 @@
 specVersion: "4.0"
 metadata:
   name: anubhav.po.managepo
+
 type: application
+
 server:
   customMiddleware:
+
+    # 🔥 IMPORTANT: Proxy to CAP backend
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ignoreCertErrors: false
+        backend:
+          - path: /odata
+            url: http://localhost:4004
         ui5:
           path:
             - /resources
             - /test-resources
           url: https://sapui5.hana.ondemand.com
+
+    # 🔄 Auto reload
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
         port: 35729
         path: webapp
         delay: 300
+
+    # 🎨 Preview (FLP sandbox)
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:

@@ -1,9 +1,8 @@
-namespace cappo.cds;
+namespace anubhav.cds;
 
 using { anubhav.db.master, anubhav.db.transaction } from './datamodel';
 
 context CDSViews {
-
     define view![POWorklist] as
         select from transaction.purchaseorder{
             key PO_ID as![PurchaseOrderId],
@@ -20,6 +19,7 @@ context CDSViews {
             PARTNER_GUID.ADDRESS_GUID.CITY as![City],
             PARTNER_GUID.ADDRESS_GUID.COUNTRY as![Country],
         };
+
 
     define view![ProductValueHelp] as
     select from master.product{
@@ -86,6 +86,4 @@ context CDSViews {
             round(sum(To_Items.GrossAmount),2) as![TotalPurchaseAmount] : Decimal(10,2),
             To_Items.CurrencyCode as![CurrencyCode]
         } group by ProductId, Country, To_Items.CurrencyCode;
-    
 }
-

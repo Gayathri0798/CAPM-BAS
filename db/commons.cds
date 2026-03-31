@@ -14,7 +14,7 @@ type AmountT : Decimal(10,2)@(
 );
 
 aspect Amount: {
-    CURRENCY: Currency;
+    CURRENCY: Currency @title : '{i18n>CURRENCY}';
     GROSS_AMOUNT: AmountT @(title: '{i18n>GrossAmount}');
     NET_AMOUNT: AmountT @(title : '{i18n>NET_AMOUNT}');
     TAX_AMOUNT: AmountT @(title : '{i18n>TAX_AMOUNT}');
