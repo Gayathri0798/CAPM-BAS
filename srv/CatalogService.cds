@@ -16,7 +16,7 @@ using { cappo.cds } from '../db/CDSViews';
 
 service CatalogService @(path:'CatalogService') {
 
-    @Capabilities : { Insertable, Deletable: false }
+    // @Capabilities : { Insertable, Deletable: false }
     entity BusinessPartnerSet as projection on master.businesspartner;
     entity AddressSet as projection on master.address;
     // @readonly
@@ -24,6 +24,7 @@ service CatalogService @(path:'CatalogService') {
     // entity PurchaseOrderItems as projection on db.transaction.poitems;
     entity POs @(odata.draft.enabled: true) as projection on transaction.purchaseorder{
         *,
+        Items : redirected to POItems,
         case OVERALL_STATUS
             when 'N' then 'New'
             when 'P' then 'Pending'
@@ -39,7 +40,7 @@ service CatalogService @(path:'CatalogService') {
             when 'A' then 3 
             when 'X' then 1
             end as IconColor: Integer,
-            Items : redirected to POItems
+            // Items : redirected to POItems
     }
     actions{
         action boost() returns POs;

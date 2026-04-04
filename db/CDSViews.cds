@@ -50,13 +50,13 @@ context CDSViews {
 
     define view![ItemView] as
     select from transaction.poitems{
-        PARENT_KEY.PARTNER_GUID.NODE_KEY as![CustomerId],
+        parent.PARTNER_GUID.NODE_KEY as![CustomerId],
         PRODUCT_GUID.NODE_KEY as![ProductId],
         CURRENCY as![CurrencyCode],
         GROSS_AMOUNT as![GrossAmount],
         NET_AMOUNT as![NetAmount],
         TAX_AMOUNT as![TaxAmount],
-        PARENT_KEY.OVERALL_STATUS as![Status]
+        parent.OVERALL_STATUS as![Status]
     };
 
     define view ProductView as select from master.product
